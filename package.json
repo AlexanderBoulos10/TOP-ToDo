@@ -1,0 +1,25 @@
+{
+  "name": "top-todo",
+  "version": "1.0.0",
+  "description": "todo list project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexanderBoulos10/TOP-ToDo.git"
+  },
+  "author": "Alexander Boulos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexanderBoulos10/TOP-ToDo/issues"
+  },
+  "homepage": "https://github.com/AlexanderBoulos10/TOP-ToDo#readme",
+  "devDependencies": {
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0"
+  }
+}
