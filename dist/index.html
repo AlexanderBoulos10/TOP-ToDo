@@ -13,16 +13,53 @@
 				<div class="all">All</div>
 				<div class="today">Today</div>
 				<div class="week">Week</div>
-				<div class="important">Important</div>
 				<div class="completed">Completed</div>
 				<div class="projects">
 					<p>Projects (0) <button class="addProject">+</button></p>
 					<ul class="listOfProjects"></ul>
 				</div>
 			</div>
-			<div>
-				<button>Add Task</button>
-				<div class="tasks">tasks</div>
+			<div id="modal-overlay">
+				<div id="modal">
+					<h2 class="formHeader">Add Task</h2>
+					<form>
+						<div>
+							<label for="title">Title</label>
+							<input type="text" id="title" />
+						</div>
+						<div>
+							<label for="description">Description</label>
+							<input type="text" id="description" />
+						</div>
+						<div>
+							<label for="date">Due Date</label>
+							<input type="date" id="date" />
+						</div>
+						<div>
+							<label for="priority">Priority</label>
+							<select name="priority" id="priority">
+								<option value="low">Low</option>
+								<option value="medium">Medium</option>
+								<option value="high">High</option>
+							</select>
+						</div>
+						<div class="formButtons">
+							<button class="submit">Submit</button>
+							<button class="cancel">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="taskSection">
+				<p class="nameOfPage">Name Of Page</p>
+				<div class="addTaskButtonHere">
+					<button class="addTaskButton">Add Task</button>
+				</div>
+				<div id="taskList">
+					<ul id="listOfTasks">
+						<li>task</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<script src="./main.js"></script>

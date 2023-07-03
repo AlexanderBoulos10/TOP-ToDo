@@ -6,7 +6,7 @@ const projectFunctions = (() => {
 	const createNewProject = (name) => {
 		const project = {};
 		project.name = name;
-		projectList.push(project);
+		projectList.push(name);
 		return project;
 	};
 
@@ -14,7 +14,9 @@ const projectFunctions = (() => {
 		projectList.splice(index, 1);
 	};
 
-	return { createNewProject, deleteProject };
+	const getProjects = () => projectList;
+
+	return { createNewProject, deleteProject, getProjects };
 })();
 
 export default projectFunctions;

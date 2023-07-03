@@ -1,11 +1,15 @@
 import taskFunctions from "./task.js";
 import projectFunctions from "./project.js";
-import allTasks from "./allPage.js";
-import projectPage from "./projectsPage.js";
+import pageLoader from "./pageLoader.js";
+import addTasksWithModal from "./modalPopup.js";
 
-projectPage();
-taskFunctions.createNewTask("csvsd", "vdsfdfbfdvcds", "vswvds", "vsdv");
-taskFunctions.createNewTask("csvsd", "vdsvcds", "vswvdfvdvds", "vsdv");
+taskFunctions.createNewTask("meow", "vdsfdfbfdvcds", "vswvds", "vsdv", 1);
+taskFunctions.createNewTask("woof", "vdsfdfbfdvcds", "vswvds", "vsdv", 1);
+taskFunctions.createNewTask(
+	"HelloDickhead",
+	"vdsvcds",
+	"vswvdfvdvds",
+	"vsdv",
+	0
+);
 taskFunctions.createNewTask("csvsd", "vdsvcds", "vswvds", "vsdvdfvv");
-
-console.log(taskFunctions.returnTasks());
