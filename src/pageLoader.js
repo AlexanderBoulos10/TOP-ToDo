@@ -2,9 +2,11 @@ import newProjectItem from "./projectsPage";
 import taskFunctions from "./task";
 import projectFunctions from "./project";
 import displayTasks from "./domDisplayTasks";
+import domTaskFunctions from "./domTaskFunctions";
 // import addTasksWithModal from "./modalPopup";
 
 const pageLoader = (() => {
+	domTaskFunctions();
 	newProjectItem();
 	const allTasksButton = document.querySelector(".all");
 	const todayTasks = document.querySelector(".today");
