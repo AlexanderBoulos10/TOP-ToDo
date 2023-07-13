@@ -9,36 +9,67 @@ const domTaskFunctions = () => {
 
 	submitTask.addEventListener("click", (e) => {
 		e.preventDefault();
-		const taskTitle = document.querySelector("#title").value;
-		const taskDescription = document.querySelector("#description").value;
-		const taskDate = document.querySelector("#date").value;
-		const taskPriority = document.querySelector("#priority").value;
-		if (nameOfPage.textContent === "All") {
-			taskFunctions.createNewTask(
-				taskTitle,
-				taskDescription,
-				taskDate,
-				taskPriority
-			);
-			displayTasks(taskFunctions.returnTasks());
+		const taskTitle = document.querySelector("#title");
+		const taskDescription = document.querySelector("#description");
+		const taskDate = document.querySelector("#date");
+		const taskPriority = document.querySelector("#priority");
+		const requiredField = document.querySelector(".requiredField");
+		if (taskTitle.value === "") {
+			requiredField.textContent = "This field is required.";
 		} else {
-			let currProjectIndex = projectFunctions
-				.getProjects()
-				.indexOf(nameOfPage.textContent);
-			taskFunctions.createNewTask(
-				taskTitle,
-				taskDescription,
-				taskDate,
-				taskPriority,
-				currProjectIndex
-			);
-			const filteredArray = taskFunctions
-				.returnTasks()
-				.filter((task) => task.projectIndex === currProjectIndex);
-			displayTasks(filteredArray);
+			if (nameOfPage.textContent === "All") {
+				taskFunctions.createNewTask(
+					taskTitle.value,
+					taskDescription.value,
+					taskDate.value,
+					taskPriority.value
+				);
+
+				displayTasks(taskFunctions.returnTasks());
+				taskTitle.value = "";
+				taskDescription.value = "";
+				taskDate.value = "";
+				taskPriority.value = "";
+			} else {
+				let currProjectIndex = projectFunctions
+					.getProjects()
+					.indexOf(nameOfPage.textContent);
+				taskFunctions.createNewTask(
+					taskTitle.value,
+					taskDescription.value,
+					taskDate.value,
+					taskPriority.value,
+					currProjectIndex
+				);
+				const filteredArray = taskFunctions
+					.returnTasks()
+					.filter((task) => task.projectIndex === currProjectIndex);
+
+				displayTasks(filteredArray);
+			}
+			taskTitle.value = "";
+			taskDescription.value = "";
+			taskDate.value = "";
+			taskPriority.value = "";
+			modalWindowOverlay.style.display = "none";
+			requiredField.textContent = "";
 		}
-		modalWindowOverlay.style.display = "none";
+	});
+};
+
+const checkBoxToggle = () => {
+	const checkBoxes = [...document.querySelectorAll(".checkbox")];
+	checkBoxes.forEach((box) => {
+		let currentTask = taskFunctions
+			.returnTasks()
+			.filter((task) => task.title === box.id);
+		if (box.checked) {
+			taskFunctions.setChecked(currentTask[0], true);
+		} else if (!box.checked) {
+			taskFunctions.setChecked(currentTask[0], false);
+		}
 	});
 };
 
 export default domTaskFunctions;
+export { checkBoxToggle };

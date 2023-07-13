@@ -47,3 +47,26 @@ form div{
 .projectItem{
     color: red;
 }
+
+.nameOfPage{
+    text-align: center;
+    margin-top: 0;
+}
+
+.addTaskButtonHere{
+    display: flex;
+    justify-content: center;
+}
+
+#listOfTasks{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.tasks{
+    border: 1px solid red;
+    list-style-type: none;
+    display: flex;
+}
+

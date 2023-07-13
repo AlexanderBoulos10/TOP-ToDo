@@ -1,17 +1,15 @@
 const addTasksWithModal = (() => {
 	const openModal = document.querySelector(".addTaskButton");
 	const modalWindowOverlay = document.querySelector("#modal-overlay");
-	const closeModal = document.querySelector("cancel");
+	const closeModal = document.querySelector(".cancel");
 
-	window.addEventListener("DOMContentLoaded", (event) => {
-		openModal.addEventListener("click", () => {
-			modalWindowOverlay.style.display = "flex";
-		});
-		window.addEventListener("DOMContentLoaded", (event) => {
-			closeModal.addEventListener("click", () => {
-				modalWindowOverlay.style.display = "none";
-			});
-		});
+	openModal.addEventListener("click", () => {
+		modalWindowOverlay.style.display = "flex";
+	});
+	closeModal.addEventListener("click", (e) => {
+		e.preventDefault();
+		console.log("here");
+		modalWindowOverlay.style.display = "none";
 	});
 })();
 

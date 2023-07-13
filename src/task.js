@@ -12,8 +12,10 @@ const taskFunctions = (() => {
 		task.description = description;
 		task.dueDate = dueDate;
 		task.priority = priority;
+		task.checked = false;
 		task.projectIndex = projectIndex;
 		taskList.push(task);
+		// return task;
 	};
 
 	const returnTasks = () => taskList;
@@ -22,7 +24,25 @@ const taskFunctions = (() => {
 
 	const editTask = () => {};
 
-	return { createNewTask, returnTasks, deleteTask, editTask };
+	const isChecked = function (task) {
+		if (task.checked) {
+			return true;
+		}
+		return false;
+	};
+
+	const setChecked = function (task, boolean) {
+		task.checked = boolean;
+	};
+
+	return {
+		createNewTask,
+		returnTasks,
+		deleteTask,
+		editTask,
+		isChecked,
+		setChecked,
+	};
 })();
 
 export default taskFunctions;
