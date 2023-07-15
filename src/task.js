@@ -22,16 +22,16 @@ const taskFunctions = (() => {
 
 	const deleteTask = () => {};
 
-	const editTask = () => {};
+	const editTask = (task) => {};
 
-	const isChecked = function (task) {
+	const isChecked = (task) => {
 		if (task.checked) {
 			return true;
 		}
 		return false;
 	};
 
-	const setChecked = function (task, boolean) {
+	const setChecked = (task, boolean) => {
 		task.checked = boolean;
 	};
 

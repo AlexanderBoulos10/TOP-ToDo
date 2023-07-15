@@ -2,13 +2,10 @@ import newProjectItem from "./projectsPage";
 import taskFunctions from "./task";
 import projectFunctions from "./project";
 import displayTasks from "./domDisplayTasks";
-import domTaskFunctions, { checkBoxToggle } from "./domTaskFunctions";
-// import addTasksWithModal from "./modalPopup";
+import { checkBoxToggle, infoTaskButton } from "./domTaskFunctions";
 
 const pageLoader = () => {
-	domTaskFunctions();
 	newProjectItem();
-
 	const allTasksButton = document.querySelector(".all");
 	const todayTasks = document.querySelector(".today");
 	const weekTasks = document.querySelector(".week");
@@ -19,6 +16,7 @@ const pageLoader = () => {
 		nameOfPage.textContent = "All";
 		checkBoxToggle();
 		displayTasks(taskFunctions.returnTasks());
+		infoTaskButton();
 	});
 
 	document.body.addEventListener("click", function (event) {
@@ -32,8 +30,10 @@ const pageLoader = () => {
 				.returnTasks()
 				.filter((task) => task.projectIndex === currProjectIndex);
 			displayTasks(filteredArray);
+			infoTaskButton();
 		}
 	});
+	infoTaskButton();
 };
 
 export default pageLoader;

@@ -6,6 +6,7 @@ const displayTasks = (tasks) => {
 	for (let task of tasks) {
 		let newLi = document.createElement("li");
 		newLi.classList.add("tasks");
+		let titleBox = document.createElement("div");
 		let checkbox = document.createElement("input");
 		checkbox.type = "checkbox";
 		checkbox.classList.add("checkbox");
@@ -15,10 +16,30 @@ const displayTasks = (tasks) => {
 			checkbox.checked = true;
 		}
 
-		newLi.append(checkbox);
+		titleBox.append(checkbox);
 		let liText = document.createElement("span");
 		liText.textContent = task.title;
-		newLi.append(liText);
+		titleBox.append(liText);
+		newLi.append(titleBox);
+
+		let restofTaskContent = document.createElement("div");
+
+		let infoButton = document.createElement("button");
+		infoButton.classList.add("infoTask");
+		infoButton.textContent = "Info";
+		restofTaskContent.append(infoButton);
+
+		let editButton = document.createElement("button");
+		editButton.classList.add("editTask");
+		editButton.textContent = "Edit";
+		restofTaskContent.append(editButton);
+
+		let deleteButton = document.createElement("button");
+		deleteButton.classList.add("deleteTask");
+		deleteButton.textContent = "delete";
+		restofTaskContent.append(deleteButton);
+
+		newLi.append(restofTaskContent);
 		listOfTasks.append(newLi);
 	}
 };

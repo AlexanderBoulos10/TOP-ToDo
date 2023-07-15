@@ -1,20 +1,27 @@
 import taskFunctions from "./task";
 import projectFunctions from "./project";
 import displayTasks from "./domDisplayTasks";
+import modalPopup from "./modalPopup";
 
 const domTaskFunctions = () => {
 	const nameOfPage = document.querySelector(".nameOfPage");
 	const submitTask = document.querySelector(".submit");
 	const modalWindowOverlay = document.querySelector("#modal-overlay");
+	const editTask = [...document.querySelector(".editTask")];
+	const deleteTask = [...document.querySelector(".deleteTask")];
 
-	submitTask.addEventListener("click", (e) => {
-		e.preventDefault();
-		const taskTitle = document.querySelector("#title");
-		const taskDescription = document.querySelector("#description");
-		const taskDate = document.querySelector("#date");
-		const taskPriority = document.querySelector("#priority");
-		const requiredField = document.querySelector(".requiredField");
+	const taskTitle = document.querySelector("#title");
+	const taskDescription = document.querySelector("#description");
+	const taskDate = document.querySelector("#date");
+	const taskPriority = document.querySelector("#priority");
+	const titleInput = document.querySelector(".titleInput");
+	const requiredField = document.createElement("p");
+	submitTask.addEventListener("click", () => {
+		const infoTask = [...document.querySelectorAll(".infoTask")];
+		console.log(infoTask);
 		if (taskTitle.value === "") {
+			requiredField.classList.add("requiredField");
+			titleInput.appendChild(requiredField);
 			requiredField.textContent = "This field is required.";
 		} else {
 			if (nameOfPage.textContent === "All") {
@@ -52,8 +59,29 @@ const domTaskFunctions = () => {
 			taskDate.value = "";
 			taskPriority.value = "";
 			modalWindowOverlay.style.display = "none";
-			requiredField.textContent = "";
+			if (document.querySelector(".requiredField")) {
+				titleInput.removeChild(requiredField);
+			}
+			modalPopup.closeModal();
+			infoTaskButton();
 		}
+	});
+};
+
+const infoTaskButton = () => {
+	console.log("here");
+	const infoTask = [...document.querySelectorAll(".infoTask")];
+	infoTask.forEach((info) => {
+		info.addEventListener("click", () => {
+			console.log("here");
+			let currentTaskName =
+				info.parentElement.previousElementSibling.firstChild.id;
+			let currentTask = taskFunctions
+				.returnTasks()
+				.filter((task) => task.title === currentTaskName);
+
+			modalPopup.infoModal(currentTask[0]);
+		});
 	});
 };
 
@@ -72,4 +100,4 @@ const checkBoxToggle = () => {
 };
 
 export default domTaskFunctions;
-export { checkBoxToggle };
+export { checkBoxToggle, infoTaskButton };
