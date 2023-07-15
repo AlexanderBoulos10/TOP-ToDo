@@ -18,7 +18,6 @@ const domTaskFunctions = () => {
 	const requiredField = document.createElement("p");
 	submitTask.addEventListener("click", () => {
 		const infoTask = [...document.querySelectorAll(".infoTask")];
-		console.log(infoTask);
 		if (taskTitle.value === "") {
 			requiredField.classList.add("requiredField");
 			titleInput.appendChild(requiredField);
@@ -64,12 +63,12 @@ const domTaskFunctions = () => {
 			}
 			modalPopup.closeModal();
 			infoTaskButton();
+			deleteButton();
 		}
 	});
 };
 
 const infoTaskButton = () => {
-	console.log("here");
 	const infoTask = [...document.querySelectorAll(".infoTask")];
 	infoTask.forEach((info) => {
 		info.addEventListener("click", () => {
@@ -99,5 +98,22 @@ const checkBoxToggle = () => {
 	});
 };
 
+const deleteButton = () => {
+	const delButtons = [...document.querySelectorAll(".deleteTask")];
+	const listOfTasks = document.querySelector("#listOfTasks");
+	delButtons.forEach((button) => {
+		button.addEventListener("click", () => {
+			let currentTaskName =
+				button.parentElement.previousElementSibling.firstChild.id;
+			let currentTask = taskFunctions
+				.returnTasks()
+				.filter((task) => task.title === currentTaskName);
+			taskFunctions.deleteTask(currentTask[0]);
+			let liTask = button.parentElement.parentElement;
+			listOfTasks.removeChild(liTask);
+		});
+	});
+};
+
 export default domTaskFunctions;
-export { checkBoxToggle, infoTaskButton };
+export { checkBoxToggle, infoTaskButton, deleteButton };

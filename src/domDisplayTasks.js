@@ -11,7 +11,6 @@ const displayTasks = (tasks) => {
 		checkbox.type = "checkbox";
 		checkbox.classList.add("checkbox");
 		checkbox.setAttribute("id", task.title);
-		console.log(taskFunctions.isChecked(task));
 		if (taskFunctions.isChecked(task)) {
 			checkbox.checked = true;
 		}

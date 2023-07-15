@@ -15,12 +15,14 @@ const taskFunctions = (() => {
 		task.checked = false;
 		task.projectIndex = projectIndex;
 		taskList.push(task);
-		// return task;
 	};
 
 	const returnTasks = () => taskList;
 
-	const deleteTask = () => {};
+	const deleteTask = (task) => {
+		let index = taskList.indexOf(task);
+		taskList.splice(index, 1);
+	};
 
 	const editTask = (task) => {};
 

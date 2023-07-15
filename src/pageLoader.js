@@ -2,7 +2,11 @@ import newProjectItem from "./projectsPage";
 import taskFunctions from "./task";
 import projectFunctions from "./project";
 import displayTasks from "./domDisplayTasks";
-import { checkBoxToggle, infoTaskButton } from "./domTaskFunctions";
+import {
+	checkBoxToggle,
+	infoTaskButton,
+	deleteButton,
+} from "./domTaskFunctions";
 
 const pageLoader = () => {
 	newProjectItem();
@@ -17,6 +21,7 @@ const pageLoader = () => {
 		checkBoxToggle();
 		displayTasks(taskFunctions.returnTasks());
 		infoTaskButton();
+		deleteButton();
 	});
 
 	document.body.addEventListener("click", function (event) {
@@ -31,9 +36,11 @@ const pageLoader = () => {
 				.filter((task) => task.projectIndex === currProjectIndex);
 			displayTasks(filteredArray);
 			infoTaskButton();
+			deleteButton();
 		}
 	});
 	infoTaskButton();
+	deleteButton();
 };
 
 export default pageLoader;
