@@ -1,4 +1,4 @@
-import newProjectItem from "./projectsPage";
+import domProjectFunctions from "./projectsPage";
 import taskFunctions from "./task";
 import projectFunctions from "./project";
 import displayTasks from "./domDisplayTasks";
@@ -10,7 +10,7 @@ import {
 } from "./domTaskFunctions";
 
 const pageLoader = () => {
-	newProjectItem();
+	domProjectFunctions.newProjectItem();
 	const allTasksButton = document.querySelector(".all");
 	const todayTasks = document.querySelector(".today");
 	const weekTasks = document.querySelector(".week");
