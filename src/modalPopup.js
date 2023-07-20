@@ -1,5 +1,5 @@
 import domTaskFunctions from "./domTaskFunctions";
-
+import taskFunctions from "./task";
 const modalPopup = (() => {
 	const addTaskButton = document.querySelector(".addTaskButton");
 	const modalWindowOverlay = document.querySelector("#modal-overlay");
@@ -17,7 +17,7 @@ const modalPopup = (() => {
 		modalWindowOverlay.style.display = "none";
 	};
 
-	addTaskButton.addEventListener("click", () => {
+	const makeForm = () => {
 		if (document.querySelector("#modal-content")) {
 			modal.removeChild(document.querySelector("#modal-content"));
 		}
@@ -25,7 +25,7 @@ const modalPopup = (() => {
 		modalContent.setAttribute("id", "modal-content");
 
 		const formHeader = document.createElement("h2");
-		formHeader.className = "formHeader";
+		formHeader.classList.add("formHeader");
 		formHeader.textContent = "Add Task";
 		modalContent.append(formHeader);
 
@@ -101,7 +101,6 @@ const modalPopup = (() => {
 		cancelButton.textContent = "Cancel";
 		formButtons.appendChild(submitBtn);
 		formButtons.appendChild(cancelButton);
-		// taskForm.appendChild(formButtons);
 
 		modalContent.appendChild(taskForm);
 		modalContent.appendChild(formButtons);
@@ -109,6 +108,10 @@ const modalPopup = (() => {
 		openModal();
 		cancelButton.addEventListener("click", () => closeModal());
 		domTaskFunctions();
+	};
+
+	addTaskButton.addEventListener("click", () => {
+		makeForm();
 	});
 	closeModalButton.addEventListener("click", (e) => {
 		e.preventDefault();
@@ -119,7 +122,6 @@ const modalPopup = (() => {
 
 	const infoModal = (task) => {
 		if (document.querySelector("#modal-content")) {
-			console.log("here");
 			modal.removeChild(document.querySelector("#modal-content"));
 		}
 		const modalContent = document.createElement("div");
@@ -187,14 +189,49 @@ const modalPopup = (() => {
 		modalContent.appendChild(buttonDiv);
 
 		modal.append(modalContent);
-		console.log(modal);
 		openModal();
 
 		cancelButton.addEventListener("click", () => closeModal());
 	};
 
-	const editModal = () => {
+	const editModal = (task) => {
+		makeForm();
+		closeModal();
+		const formHeader = document.querySelector(".formHeader");
+		const taskTitle = document.querySelector("#title");
+		const taskDescription = document.querySelector("#description");
+		const taskDate = document.querySelector("#date");
+		const taskPriority = document.querySelector("#priority");
+		const formButtons = document.querySelector(".formButtons");
+
+		const submitButton = document.querySelector(".submit");
+		formButtons.removeChild(submitButton);
+		const editSubmitButton = document.createElement("button");
+		editSubmitButton.classList.add("editSubmit");
+		editSubmitButton.textContent = "Submit";
+		formButtons.prepend(editSubmitButton);
+
+		taskTitle.value = task.title;
+		taskDescription.value = task.description;
+		taskDate.value = task.dueDate;
+		taskPriority.value = task.priority;
 		formHeader.textContent = "Edit Task";
+		openModal();
+
+		let checkbox = document.getElementById(task.title);
+		editSubmitButton.addEventListener("click", () => {
+			console.log("here");
+			taskFunctions.editTask(
+				task,
+				taskTitle.value,
+				taskDescription.value,
+				taskDate.value,
+				taskPriority.value
+			);
+			checkbox.id = task.title;
+			checkbox.nextElementSibling.textContent = task.title;
+			closeModal();
+		});
 	};
 
 	return { infoModal, editModal, closeModal };

@@ -6,6 +6,7 @@ import {
 	checkBoxToggle,
 	infoTaskButton,
 	deleteButton,
+	editButton,
 } from "./domTaskFunctions";
 
 const pageLoader = () => {
@@ -22,6 +23,7 @@ const pageLoader = () => {
 		displayTasks(taskFunctions.returnTasks());
 		infoTaskButton();
 		deleteButton();
+		editButton();
 	});
 
 	document.body.addEventListener("click", function (event) {
@@ -37,10 +39,12 @@ const pageLoader = () => {
 			displayTasks(filteredArray);
 			infoTaskButton();
 			deleteButton();
+			editButton();
 		}
 	});
 	infoTaskButton();
 	deleteButton();
+	editButton();
 };
 
 export default pageLoader;

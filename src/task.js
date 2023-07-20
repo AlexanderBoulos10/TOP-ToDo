@@ -24,7 +24,13 @@ const taskFunctions = (() => {
 		taskList.splice(index, 1);
 	};
 
-	const editTask = (task) => {};
+	const editTask = (task, title, description, dueDate, priority) => {
+		task.title = title;
+		task.description = description;
+		task.dueDate = dueDate;
+		task.priority = priority;
+		console.log(taskList);
+	};
 
 	const isChecked = (task) => {
 		if (task.checked) {
@@ -44,6 +50,7 @@ const taskFunctions = (() => {
 		editTask,
 		isChecked,
 		setChecked,
+		editTask,
 	};
 })();
 

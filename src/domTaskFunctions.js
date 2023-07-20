@@ -7,8 +7,6 @@ const domTaskFunctions = () => {
 	const nameOfPage = document.querySelector(".nameOfPage");
 	const submitTask = document.querySelector(".submit");
 	const modalWindowOverlay = document.querySelector("#modal-overlay");
-	const editTask = [...document.querySelector(".editTask")];
-	const deleteTask = [...document.querySelector(".deleteTask")];
 
 	const taskTitle = document.querySelector("#title");
 	const taskDescription = document.querySelector("#description");
@@ -64,6 +62,7 @@ const domTaskFunctions = () => {
 			modalPopup.closeModal();
 			infoTaskButton();
 			deleteButton();
+			editButton();
 		}
 	});
 };
@@ -72,7 +71,6 @@ const infoTaskButton = () => {
 	const infoTask = [...document.querySelectorAll(".infoTask")];
 	infoTask.forEach((info) => {
 		info.addEventListener("click", () => {
-			console.log("here");
 			let currentTaskName =
 				info.parentElement.previousElementSibling.firstChild.id;
 			let currentTask = taskFunctions
@@ -115,5 +113,19 @@ const deleteButton = () => {
 	});
 };
 
+const editButton = () => {
+	const edtButtons = [...document.querySelectorAll(".editTask")];
+	edtButtons.forEach((button) => {
+		button.addEventListener("click", () => {
+			let currentTaskName =
+				button.parentElement.previousElementSibling.firstChild.id;
+			let currentTask = taskFunctions
+				.returnTasks()
+				.filter((task) => task.title === currentTaskName);
+			modalPopup.editModal(currentTask[0]);
+		});
+	});
+};
+
 export default domTaskFunctions;
-export { checkBoxToggle, infoTaskButton, deleteButton };
+export { checkBoxToggle, infoTaskButton, deleteButton, editButton };
