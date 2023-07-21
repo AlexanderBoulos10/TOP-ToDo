@@ -31,7 +31,6 @@ const taskFunctions = (() => {
 		task.description = description;
 		task.dueDate = dueDate;
 		task.priority = priority;
-		console.log(taskList);
 		adjustLocalStorage();
 	};
 
@@ -50,7 +49,6 @@ const taskFunctions = (() => {
 		if (localStorage != null) {
 			localStorage.removeItem("tasks");
 		}
-		console.log(JSON.stringify(taskList));
 		localStorage.setItem("tasks", JSON.stringify(taskList));
 	};
 

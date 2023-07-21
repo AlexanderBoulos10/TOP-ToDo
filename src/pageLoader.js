@@ -1,4 +1,4 @@
-import domProjectFunctions from "./projectsPage";
+import domProjectFunctions, { domDeleteProject } from "./projectsPage";
 import taskFunctions from "./task";
 import projectFunctions from "./project";
 import displayTasks from "./domDisplayTasks";
@@ -24,10 +24,14 @@ const pageLoader = () => {
 		infoTaskButton();
 		deleteButton();
 		editButton();
+		domDeleteProject();
 	});
 
 	document.body.addEventListener("click", function (event) {
-		if (event.target.className == "projectItem") {
+		if (
+			event.target.className == "projectItem" ||
+			event.target.className == "projectName"
+		) {
 			nameOfPage.textContent = event.target.textContent;
 			checkBoxToggle();
 			let currProjectIndex = projectFunctions
@@ -40,11 +44,13 @@ const pageLoader = () => {
 			infoTaskButton();
 			deleteButton();
 			editButton();
+			domDeleteProject();
 		}
 	});
 	infoTaskButton();
 	deleteButton();
 	editButton();
+	domDeleteProject();
 };
 
 export default pageLoader;

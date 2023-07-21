@@ -15,7 +15,6 @@ const domTaskFunctions = () => {
 	const titleInput = document.querySelector(".titleInput");
 	const requiredField = document.createElement("p");
 	submitTask.addEventListener("click", () => {
-		const infoTask = [...document.querySelectorAll(".infoTask")];
 		if (taskTitle.value === "") {
 			requiredField.classList.add("requiredField");
 			titleInput.appendChild(requiredField);

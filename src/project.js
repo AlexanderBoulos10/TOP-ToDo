@@ -8,7 +8,8 @@ const projectFunctions = (() => {
 		adjustLocalStorage();
 	};
 
-	const deleteProject = (index) => {
+	const deleteProject = (project) => {
+		let index = projectList.indexOf(project);
 		projectList.splice(index, 1);
 		adjustLocalStorage();
 	};
