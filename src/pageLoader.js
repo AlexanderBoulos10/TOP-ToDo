@@ -11,6 +11,9 @@ import {
 
 const pageLoader = () => {
 	domProjectFunctions.newProjectItem();
+	domDeleteProject();
+
+	const taskButton = document.querySelector(".addTaskButton");
 	const allTasksButton = document.querySelector(".all");
 	const todayTasks = document.querySelector(".today");
 	const weekTasks = document.querySelector(".week");
@@ -18,6 +21,7 @@ const pageLoader = () => {
 	const nameOfPage = document.querySelector(".nameOfPage");
 
 	allTasksButton.addEventListener("click", () => {
+		taskButton.style.display = "block";
 		nameOfPage.textContent = "All";
 		checkBoxToggle();
 		displayTasks(taskFunctions.returnTasks());
@@ -32,6 +36,7 @@ const pageLoader = () => {
 			event.target.className == "projectItem" ||
 			event.target.className == "projectName"
 		) {
+			taskButton.style.display = "block";
 			nameOfPage.textContent = event.target.textContent;
 			checkBoxToggle();
 			let currProjectIndex = projectFunctions
@@ -46,6 +51,30 @@ const pageLoader = () => {
 			editButton();
 			domDeleteProject();
 		}
+	});
+
+	completedTasks.addEventListener("click", () => {
+		taskButton.style.display = "none";
+		nameOfPage.textContent = "Completed Tasks";
+		checkBoxToggle();
+		let checkedTasks = taskFunctions
+			.returnTasks()
+			.filter((task) => task.checked === true);
+		displayTasks(checkedTasks);
+		const checkBoxes = [...document.querySelectorAll(".checkbox")];
+		checkBoxes.forEach((box) => {
+			box.addEventListener("click", () => {
+				checkBoxToggle();
+				checkedTasks = taskFunctions
+					.returnTasks()
+					.filter((task) => task.checked === true);
+				displayTasks(checkedTasks);
+			});
+		});
+		infoTaskButton();
+		deleteButton();
+		editButton();
+		domDeleteProject();
 	});
 	infoTaskButton();
 	deleteButton();

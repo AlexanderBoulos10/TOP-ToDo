@@ -1,6 +1,6 @@
 import taskFunctions from "./task.js";
 import projectFunctions from "./project.js";
-import domProjectFunctions from "./projectsPage.js";
+import domProjectFunctions, { domDeleteProject } from "./projectsPage.js";
 import pageLoader from "./pageLoader.js";
 import displayTasks from "./domDisplayTasks.js";
 import addTasksWithModal from "./modalPopup.js";
