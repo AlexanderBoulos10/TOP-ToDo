@@ -20,6 +20,7 @@ const domTaskFunctions = () => {
 			titleInput.appendChild(requiredField);
 			requiredField.textContent = "This field is required.";
 		} else {
+			console.log(taskDate.value);
 			if (nameOfPage.textContent === "All") {
 				taskFunctions.createNewTask(
 					taskTitle.value,

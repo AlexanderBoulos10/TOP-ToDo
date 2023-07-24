@@ -3,7 +3,6 @@ import projectFunctions from "./project.js";
 import domProjectFunctions, { domDeleteProject } from "./projectsPage.js";
 import pageLoader from "./pageLoader.js";
 import displayTasks from "./domDisplayTasks.js";
-import addTasksWithModal from "./modalPopup.js";
 
 // taskFunctions.createNewTask("meow", "description", "date", "low", 0);
 // // taskFunctions.createNewTask("woof", "vdsfdfbfdvcds", "vswvds", "vsdv", 1);

@@ -8,6 +8,7 @@ import {
 	deleteButton,
 	editButton,
 } from "./domTaskFunctions";
+import { isToday, parseISO, isThisWeek } from "date-fns";
 
 const pageLoader = () => {
 	domProjectFunctions.newProjectItem();
@@ -76,6 +77,35 @@ const pageLoader = () => {
 		editButton();
 		domDeleteProject();
 	});
+
+	todayTasks.addEventListener("click", () => {
+		taskButton.style.display = "none";
+		nameOfPage.textContent = "Due Today";
+		checkBoxToggle();
+		let today = taskFunctions
+			.returnTasks()
+			.filter((task) => isToday(parseISO(task.dueDate)) === true);
+		displayTasks(today);
+		infoTaskButton();
+		deleteButton();
+		editButton();
+		domDeleteProject();
+	});
+
+	weekTasks.addEventListener("click", () => {
+		taskButton.style.display = "none";
+		nameOfPage.textContent = "Due this Week";
+		checkBoxToggle();
+		let week = taskFunctions
+			.returnTasks()
+			.filter((task) => isThisWeek(parseISO(task.dueDate)) === true);
+		displayTasks(week);
+		infoTaskButton();
+		deleteButton();
+		editButton();
+		domDeleteProject();
+	});
+
 	infoTaskButton();
 	deleteButton();
 	editButton();
