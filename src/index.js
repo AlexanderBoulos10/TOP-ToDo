@@ -4,18 +4,15 @@ import domProjectFunctions, { domDeleteProject } from "./projectsPage.js";
 import pageLoader from "./pageLoader.js";
 import displayTasks from "./domDisplayTasks.js";
 
-// taskFunctions.createNewTask("meow", "description", "date", "low", 0);
-// // taskFunctions.createNewTask("woof", "vdsfdfbfdvcds", "vswvds", "vsdv", 1);
-// taskFunctions.createNewTask(
-// 	"HelloDickhead",
-// 	"vdsvcds",
-// 	"vswvdfvdvds",
-// 	"vsdv",
-// 	0
-// );
-// taskFunctions.createNewTask("csvsd", "vdsvcds", "vswvds", "vsdvdfvv");
+const allButton = document.querySelector(".all");
+const nameOfPage = document.querySelector(".nameOfPage");
+const numOfTasks = document.querySelector(".numOfTasks");
+
 projectFunctions.initializeProjectsFromStorage();
 taskFunctions.initializeTasksFromStorage();
 displayTasks(taskFunctions.returnTasks());
 domProjectFunctions.displayProjects();
 pageLoader();
+allButton.style.backgroundColor = "#3C6E71";
+nameOfPage.textContent = "All Tasks";
+numOfTasks.textContent = `(${taskFunctions.returnTasks().length})`;

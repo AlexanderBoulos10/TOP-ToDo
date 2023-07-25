@@ -5,6 +5,7 @@ import modalPopup from "./modalPopup";
 
 const domTaskFunctions = () => {
 	const nameOfPage = document.querySelector(".nameOfPage");
+	const numOfTasks = document.querySelector(".numOfTasks");
 	const submitTask = document.querySelector(".submit");
 	const modalWindowOverlay = document.querySelector("#modal-overlay");
 
@@ -20,8 +21,7 @@ const domTaskFunctions = () => {
 			titleInput.appendChild(requiredField);
 			requiredField.textContent = "This field is required.";
 		} else {
-			console.log(taskDate.value);
-			if (nameOfPage.textContent === "All") {
+			if (nameOfPage.textContent === "All Tasks") {
 				taskFunctions.createNewTask(
 					taskTitle.value,
 					taskDescription.value,
@@ -30,11 +30,15 @@ const domTaskFunctions = () => {
 				);
 
 				displayTasks(taskFunctions.returnTasks());
+				numOfTasks.textContent = `(${
+					taskFunctions.returnTasks().length
+				})`;
 				taskTitle.value = "";
 				taskDescription.value = "";
 				taskDate.value = "";
 				taskPriority.value = "";
 			} else {
+				console.log("here");
 				let currProjectIndex = projectFunctions
 					.getProjects()
 					.indexOf(nameOfPage.textContent);
@@ -50,6 +54,7 @@ const domTaskFunctions = () => {
 					.filter((task) => task.projectIndex === currProjectIndex);
 
 				displayTasks(filteredArray);
+				numOfTasks.textContent = updateTaskNumber(filteredArray);
 			}
 			taskTitle.value = "";
 			taskDescription.value = "";
@@ -99,6 +104,7 @@ const checkBoxToggle = () => {
 const deleteButton = () => {
 	const delButtons = [...document.querySelectorAll(".deleteTask")];
 	const listOfTasks = document.querySelector("#listOfTasks");
+	const numOfTasks = document.querySelector(".numOfTasks");
 	delButtons.forEach((button) => {
 		button.addEventListener("click", () => {
 			let currentTaskName =
@@ -109,6 +115,7 @@ const deleteButton = () => {
 			taskFunctions.deleteTask(currentTask[0]);
 			let liTask = button.parentElement.parentElement;
 			listOfTasks.removeChild(liTask);
+			numOfTasks.textContent = `(${taskFunctions.returnTasks().length})`;
 		});
 	});
 };
@@ -125,6 +132,10 @@ const editButton = () => {
 			modalPopup.editModal(currentTask[0]);
 		});
 	});
+};
+
+const updateTaskNumber = (array) => {
+	return `(${array.length})`;
 };
 
 export default domTaskFunctions;

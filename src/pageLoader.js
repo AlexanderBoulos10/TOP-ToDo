@@ -7,6 +7,7 @@ import {
 	infoTaskButton,
 	deleteButton,
 	editButton,
+	numOfTasks,
 } from "./domTaskFunctions";
 import { isToday, parseISO, isThisWeek } from "date-fns";
 
@@ -20,16 +21,19 @@ const pageLoader = () => {
 	const weekTasks = document.querySelector(".week");
 	const completedTasks = document.querySelector(".completed");
 	const nameOfPage = document.querySelector(".nameOfPage");
+	const numOfTasks = document.querySelector(".numOfTasks");
 
 	allTasksButton.addEventListener("click", () => {
 		taskButton.style.display = "block";
-		nameOfPage.textContent = "All";
+		nameOfPage.textContent = "All Tasks";
+		numOfTasks.textContent = `(${taskFunctions.returnTasks().length})`;
 		checkBoxToggle();
 		displayTasks(taskFunctions.returnTasks());
 		infoTaskButton();
 		deleteButton();
 		editButton();
 		domDeleteProject();
+		setColorOfNavWhenClicked();
 	});
 
 	document.body.addEventListener("click", function (event) {
@@ -37,8 +41,8 @@ const pageLoader = () => {
 			event.target.className == "projectItem" ||
 			event.target.className == "projectName"
 		) {
-			taskButton.style.display = "block";
 			nameOfPage.textContent = event.target.textContent;
+			taskButton.style.display = "block";
 			checkBoxToggle();
 			let currProjectIndex = projectFunctions
 				.getProjects()
@@ -46,11 +50,13 @@ const pageLoader = () => {
 			const filteredArray = taskFunctions
 				.returnTasks()
 				.filter((task) => task.projectIndex === currProjectIndex);
+			numOfTasks.textContent = `(${filteredArray.length})`;
 			displayTasks(filteredArray);
 			infoTaskButton();
 			deleteButton();
 			editButton();
 			domDeleteProject();
+			setColorOfNavWhenClicked();
 		}
 	});
 
@@ -72,10 +78,12 @@ const pageLoader = () => {
 				displayTasks(checkedTasks);
 			});
 		});
+		numOfTasks.textContent = `(${checkedTasks.length})`;
 		infoTaskButton();
 		deleteButton();
 		editButton();
 		domDeleteProject();
+		setColorOfNavWhenClicked();
 	});
 
 	todayTasks.addEventListener("click", () => {
@@ -85,11 +93,13 @@ const pageLoader = () => {
 		let today = taskFunctions
 			.returnTasks()
 			.filter((task) => isToday(parseISO(task.dueDate)) === true);
+		numOfTasks.textContent = `(${today.length})`;
 		displayTasks(today);
 		infoTaskButton();
 		deleteButton();
 		editButton();
 		domDeleteProject();
+		setColorOfNavWhenClicked();
 	});
 
 	weekTasks.addEventListener("click", () => {
@@ -99,17 +109,35 @@ const pageLoader = () => {
 		let week = taskFunctions
 			.returnTasks()
 			.filter((task) => isThisWeek(parseISO(task.dueDate)) === true);
+		numOfTasks.textContent = `(${week.length})`;
 		displayTasks(week);
 		infoTaskButton();
 		deleteButton();
 		editButton();
 		domDeleteProject();
+		setColorOfNavWhenClicked();
 	});
 
 	infoTaskButton();
 	deleteButton();
 	editButton();
 	domDeleteProject();
+	setColorOfNavWhenClicked();
+};
+
+const setColorOfNavWhenClicked = () => {
+	const sidebar = document.querySelector(".sidebar");
+	const sidebarChildren = [...sidebar.children];
+	sidebarChildren.forEach((child) => {
+		if (child.classList.contains("projects")) {
+			return;
+		} else {
+			child.style.backgroundColor = "#fff";
+			child.addEventListener("click", () => {
+				child.style.backgroundColor = "#3C6E71";
+			});
+		}
+	});
 };
 
 export default pageLoader;

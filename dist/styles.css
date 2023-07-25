@@ -1,20 +1,45 @@
 body{
     margin: 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+    color: #353535;
+    background-color: #FFFFFF;
+    font-size: 1.2rem;
+}
+
+h1{
+    background-color: #3C6E71;
+    margin: 0;
+    padding: 1rem;
 }
 
 #content{
     display: flex;
-    /* gap: 40%; */
 }
 
 .sidebar{
-    background-color: aqua;
+    width: 20%;
+    padding: 0;
+    background-color: #D9D9D9;
+    position: fixed;
     height: 100%;
+    overflow: auto;
 }
 
 .sidebar div{
     border: 1px solid black;
-    margin-bottom: 6px;
+    border-radius: 0.7rem;
+    padding: 7px;
+    margin: 1.2rem;
+    background-color: #ffffff;
+    font-weight: bold;
+    transition: 0.25s;
+}
+
+.sidebar div:hover{
+    cursor: pointer;
 }
 
 #modal-overlay{
@@ -49,18 +74,73 @@ form div{
     justify-content: space-around;
 }
 
+div.projects{
+    border: none;
+    background-color: #D9D9D9;
+}
+
+div.projects:hover{
+    cursor: auto;
+}
+
+
+.projectTitle{
+    margin-bottom: 0;
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+}
+
+.projectTitleContent{
+    align-self: center;
+}
+
+.addProject{
+    display: inline-flex;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 30px;
+    height: 20px;
+    width: 20px;
+    justify-content: center;
+    align-items: center;
+    transition: 0.25s;
+}
+
+.addProject:hover{
+    cursor: pointer;
+    background-color: #9c9c9c;
+}
+
 .projectItem{
     color: red;
 }
 
-.nameOfPage{
+.titleOfPage{
     text-align: center;
-    margin-top: 0;
+    margin-top: 5px;
+    font-size: 1.8rem;
+    color: #284B63;
+    font-weight: bold;
 }
 
 .addTaskButtonHere{
     display: flex;
     justify-content: center;
+}
+
+.addTaskButton{
+    width: 100%;
+    background-color: #D9D9D9;
+    color: #353535;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 10px 0;
+    border: none;
+    border-radius: 20px;
 }
 
 #listOfTasks{
@@ -70,6 +150,7 @@ form div{
 }
 
 .taskSection{
+    margin: auto;
     width: 50%;
 }
 
@@ -80,3 +161,6 @@ form div{
     justify-content: space-between; 
 }
 
+.checkbox:hover{
+    cursor: pointer;
+}

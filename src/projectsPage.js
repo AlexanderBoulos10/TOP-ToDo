@@ -54,8 +54,6 @@ const domDeleteProject = () => {
 	const projectCounter = document.querySelector(".projectCount");
 	const delButton = [...document.querySelectorAll(".deleteProject")];
 	delButton.forEach((button) => {
-		console.log("yo");
-		// console.log(listOfTasks.children);
 		button.addEventListener("click", () => {
 			const listOfTasks = document.querySelector("#listOfTasks");
 			const listOfProjects = document.querySelector(".listOfProjects");
@@ -65,9 +63,9 @@ const domDeleteProject = () => {
 				.indexOf(currentProject.textContent);
 			projectFunctions.deleteProject(currentProject.textContent);
 			projectCounter.textContent = projectFunctions.getProjects().length;
-			console.log(currentProject.parentElement);
-			console.log(listOfProjects.children);
-			listOfProjects.removeChild(currentProject.parentElement);
+			if (listOfProjects.hasChildNodes()) {
+				listOfProjects.removeChild(currentProject.parentElement);
+			}
 			const tasksToDelete = taskFunctions
 				.returnTasks()
 				.filter((task) => task.projectIndex === projectIndex);

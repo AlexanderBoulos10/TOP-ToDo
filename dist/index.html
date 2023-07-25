@@ -3,6 +3,11 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+			rel="stylesheet" />
 		<link rel="stylesheet" href="styles.css" />
 		<title>Todo List</title>
 	</head>
@@ -15,8 +20,11 @@
 				<div class="week">Week</div>
 				<div class="completed">Completed</div>
 				<div class="projects">
-					<p>
-						Projects (<span class="projectCount">0</span>)
+					<p class="projectTitle">
+						<span class="projectTitleContent"
+							>Projects (<span class="projectCount">0</span
+							>)</span
+						>
 						<button class="addProject">+</button>
 					</p>
 					<ul class="listOfProjects"></ul>
@@ -57,9 +65,12 @@
 				</div>
 			</div>
 			<div class="taskSection">
-				<p class="nameOfPage">All</p>
+				<div class="titleOfPage">
+					<span class="nameOfPage">All Tasks</span>
+					<span class="numOfTasks">(0)</span>
+				</div>
 				<div class="addTaskButtonHere">
-					<button class="addTaskButton">Add Task</button>
+					<button class="addTaskButton">Create new Task</button>
 				</div>
 				<div id="taskList">
 					<ul id="listOfTasks"></ul>

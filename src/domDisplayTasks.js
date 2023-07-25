@@ -11,7 +11,6 @@ const displayTasks = (tasks) => {
 		checkbox.type = "checkbox";
 		checkbox.classList.add("checkbox");
 		checkbox.setAttribute("id", task.title);
-		console.log(taskFunctions.isChecked(task));
 		if (taskFunctions.isChecked(task)) {
 			checkbox.checked = true;
 		}
@@ -23,6 +22,11 @@ const displayTasks = (tasks) => {
 		newLi.append(titleBox);
 
 		let restofTaskContent = document.createElement("div");
+
+		let showDate = document.createElement("span");
+		showDate.classList.add("dateInTask");
+		showDate.textContent = task.dueDate;
+		restofTaskContent.append(showDate);
 
 		let infoButton = document.createElement("button");
 		infoButton.classList.add("infoTask");
