@@ -77,7 +77,8 @@ const infoTaskButton = () => {
 	infoTask.forEach((info) => {
 		info.addEventListener("click", () => {
 			let currentTaskName =
-				info.parentElement.previousElementSibling.firstChild.id;
+				info.parentElement.previousElementSibling.previousElementSibling
+					.firstChild.id;
 			let currentTask = taskFunctions
 				.returnTasks()
 				.filter((task) => task.title === currentTaskName);
@@ -89,15 +90,31 @@ const infoTaskButton = () => {
 
 const checkBoxToggle = () => {
 	const checkBoxes = [...document.querySelectorAll(".checkbox")];
+	const nameOfPage = document.querySelector(".nameOfPage");
+	const numOfTasks = document.querySelector(".numOfTasks");
+
 	checkBoxes.forEach((box) => {
-		let currentTask = taskFunctions
-			.returnTasks()
-			.filter((task) => task.title === box.id);
-		if (box.checked) {
-			taskFunctions.setChecked(currentTask[0], true);
-		} else if (!box.checked) {
-			taskFunctions.setChecked(currentTask[0], false);
-		}
+		box.addEventListener("change", () => {
+			if (nameOfPage.textContent == "Completed Tasks") {
+				console.log("here");
+				let currentTask = taskFunctions
+					.returnTasks()
+					.filter((task) => task.title === box.id);
+				taskFunctions.setChecked(currentTask[0]);
+				// checkBoxToggle();
+				let checkedTasks = taskFunctions
+					.returnTasks()
+					.filter((task) => task.checked === true);
+				console.log(checkedTasks);
+				displayTasks(checkedTasks);
+				numOfTasks.textContent = updateTaskNumber(checkedTasks);
+			} else {
+				let currentTask = taskFunctions
+					.returnTasks()
+					.filter((task) => task.title === box.id);
+				taskFunctions.setChecked(currentTask[0]);
+			}
+		});
 	});
 };
 
@@ -108,7 +125,8 @@ const deleteButton = () => {
 	delButtons.forEach((button) => {
 		button.addEventListener("click", () => {
 			let currentTaskName =
-				button.parentElement.previousElementSibling.firstChild.id;
+				button.parentElement.previousElementSibling
+					.previousElementSibling.firstChild.id;
 			let currentTask = taskFunctions
 				.returnTasks()
 				.filter((task) => task.title === currentTaskName);
@@ -125,7 +143,8 @@ const editButton = () => {
 	edtButtons.forEach((button) => {
 		button.addEventListener("click", () => {
 			let currentTaskName =
-				button.parentElement.previousElementSibling.firstChild.id;
+				button.parentElement.previousElementSibling
+					.previousElementSibling.firstChild.id;
 			let currentTask = taskFunctions
 				.returnTasks()
 				.filter((task) => task.title === currentTaskName);
@@ -139,4 +158,10 @@ const updateTaskNumber = (array) => {
 };
 
 export default domTaskFunctions;
-export { checkBoxToggle, infoTaskButton, deleteButton, editButton };
+export {
+	checkBoxToggle,
+	infoTaskButton,
+	deleteButton,
+	editButton,
+	updateTaskNumber,
+};
